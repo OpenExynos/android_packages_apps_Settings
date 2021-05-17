@@ -26,6 +26,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
 import android.widget.Switch;
 
 import com.android.internal.logging.MetricsLogger;
@@ -101,7 +107,7 @@ public class AndroidBeam extends InstrumentedFragment
         boolean success = false;
         mSwitchBar.setEnabled(false);
         if (desiredState) {
-            success = mNfcAdapter.enableNdefPush();
+            // success = mNfcAdapter.enableNdefPush();
         } else {
             success = mNfcAdapter.disableNdefPush();
         }

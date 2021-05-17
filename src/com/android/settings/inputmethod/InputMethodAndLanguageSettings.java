@@ -139,7 +139,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             updateInputMethodSelectorSummary(loadInputMethodSelectorVisibility());
         }
 
-        new VoiceInputOutputSettings(this).onCreate();
+        // new VoiceInputOutputSettings(this).onCreate();
 
         // Get references to dynamically constructed categories.
         mHardKeyboardCategory = (PreferenceCategory)findPreference("hard_keyboard");
@@ -792,15 +792,15 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
 
             // Text-to-speech.
-            TtsEngines ttsEngines = new TtsEngines(context);
-            if (!ttsEngines.getEngines().isEmpty()) {
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = "tts_settings";
-                indexable.title = context.getString(R.string.tts_settings_title);
-                indexable.screenTitle = screenTitle;
-                indexable.keywords = context.getString(R.string.keywords_text_to_speech_output);
-                indexables.add(indexable);
-            }
+            // TtsEngines ttsEngines = new TtsEngines(context);
+            // if (!ttsEngines.getEngines().isEmpty()) {
+            //     indexable = new SearchIndexableRaw(context);
+            //     indexable.key = "tts_settings";
+            //     indexable.title = context.getString(R.string.tts_settings_title);
+            //     indexable.screenTitle = screenTitle;
+            //     indexable.keywords = context.getString(R.string.keywords_text_to_speech_output);
+            //     indexables.add(indexable);
+            // }
 
             // Pointer settings.
             indexable = new SearchIndexableRaw(context);

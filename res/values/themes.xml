@@ -135,6 +135,12 @@
 
     <style name="Theme.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
+        <item name="android:titleTextStyle">@style/ActionBarTitleFontSize.TitleTextStyle </item>
+    </style>
+
+    <style name="ActionBarTitleFontSize.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/actionbar_title_size</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="Theme.ActionBar.SubSettings" parent="Theme.ActionBar">
@@ -186,6 +192,11 @@
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+	<item name="android:layout_margin">0dip</item>
+        <item name="android:padding">0dip</item>
+	<item name="android:textSize">14sp</item>
+	<item name="android:paddingStart">0dp</item>
+	<item name="android:layout_marginStart">0dp</item>
     </style>
 
     <style name="Theme.NotificationStation" parent="@android:style/Theme.Material">

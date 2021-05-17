@@ -52,11 +52,6 @@
             android:persistent="false" />
 
     <Preference
-            android:key="wifi_direct"
-            android:title="@string/wifi_menu_p2p"
-            android:persistent="false" />
-
-    <Preference
             android:key="wps_push_button"
             android:title="@string/wifi_menu_wps_pbc"
             android:persistent="false" />

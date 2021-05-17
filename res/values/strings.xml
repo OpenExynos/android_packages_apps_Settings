@@ -1376,6 +1376,31 @@
     <!-- Description of NFC in the 1st level settings screen, for a phone. [CHAR LIMIT=NONE] -->
     <string name="nfc_quick_toggle_summary" product="default">Allow data exchange when the phone touches another device</string>
 
+    <!-- NFC Advanced settings -->
+    <string name="nfc_advanced_settings_title">NFC Advanced Setting</string>
+    <string name="nfc_advanced_on_summary">Configure NFC Setting for Card Mode</string>
+    <string name="nfc_advanced_off_summary">Off</string>
+    <string name="nfc_advanced_disabled_summary">Not available because NFC is off</string>
+    <string name="nfc_advanced_label">NFC Advanced Setting</string>
+    <string name="nfc_advanced_rdbtn_str_hce">Android OS (HCE)</string>
+    <string name="nfc_advanced_rdbtn_str_uicc">UICC SE</string>
+    <string name="nfc_advanced_rdbtn_str_ese">Embedded SE</string>
+    <string name="nfc_advanced_rdbtn_str_uiccsel1">UICC Slot #1</string>
+    <string name="nfc_advanced_rdbtn_str_uiccsel2">UICC Slot #2</string>
+    <string name="nfc_advanced_rdbtn_str_defaultpay">Payment Ready</string>
+    <string name="nfc_advanced_rdbtn_str_astylepay">Payment Execute</string>
+    <string name="nfc_advanced_rdbtn_str_nopay">No Payment</string>
+    <string name="nfc_advanced_rdbtn_str_techa">A</string>
+    <string name="nfc_advanced_rdbtn_str_techb">B</string>
+    <string name="nfc_advanced_rdbtn_str_techf">F</string>
+    <string name="nfc_advanced_rdbtn_str_techab">AB</string>
+    <string name="nfc_advanced_rdbtn_str_techall">ABF</string>
+    <string name="nfc_advanced_rdbtn_str_technull">Null</string>
+    <string name="nfc_advanced_tv_selse">Select Default SE</string>
+    <string name="nfc_advanced_tv_seluicc">Select UICC Slot</string>
+    <string name="nfc_advanced_tv_selpay">One-Touch Payment</string>
+    <string name="nfc_advanced_tv_selrf">Select RF Listen Tech</string>
+
     <!-- Used to enter the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
     <string name="android_beam_settings_title">Android Beam</string>
     <!-- Used to describe the on state of the Android Beam feature [CHAR LIMIT=NONE] -->
@@ -2159,7 +2184,7 @@
     <!-- About tablet screen, summary of the item that takes you to tablet status screen -->
     <string name="device_status_summary" product="tablet">Status of the battery, network, and other information</string>
     <!-- About phone screen, summary of the item to go into the phone status screen -->
-    <string name="device_status_summary" product="default">Phone number, signal, etc.</string>
+    <string name="device_status_summary" product="default">Phone number,signal, etc.</string>
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
     <string name="storage_settings" >Storage</string>
     <!-- Main settings screen item's title to go into the storage & USB settings screen [CHAR LIMIT=25] -->
@@ -2873,7 +2898,7 @@
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
     <string name="about_settings" product="tablet">About tablet</string>
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
-    <string name="about_settings" product="default">About phone</string>
+    <string name="about_settings" product="default">About watch</string>
     <!-- Main settings screen, setting summary for the user to go into the About phone screen-->
     <string name="about_settings_summary">View legal info, status, software version</string>
     <!-- About phone settings screen, setting option name to go to dialog that shows legal info -->

@@ -142,10 +142,10 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(mWifiAssistantPreference);
         }
 
-        Intent wifiDirectIntent = new Intent(context,
-                com.android.settings.Settings.WifiP2pSettingsActivity.class);
-        Preference wifiDirectPref = findPreference(KEY_WIFI_DIRECT);
-        wifiDirectPref.setIntent(wifiDirectIntent);
+        // Intent wifiDirectIntent = new Intent(context,
+        //         com.android.settings.Settings.WifiP2pSettingsActivity.class);
+        // Preference wifiDirectPref = findPreference(KEY_WIFI_DIRECT);
+        // wifiDirectPref.setIntent(wifiDirectIntent);
 
         // WpsDialog: Create the dialog like WifiSettings does.
         Preference wpsPushPref = findPreference(KEY_WPS_PUSH);

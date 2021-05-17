@@ -62,6 +62,11 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+    private static final String KEY_NFC_ADVANCED_SETTINGS = "nfc_advanced_settings";
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
     private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
     private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
@@ -232,10 +237,18 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+        PreferenceScreen nfcAdvanced = (PreferenceScreen) findPreference(KEY_NFC_ADVANCED_SETTINGS);
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
         SwitchPreference nsd = (SwitchPreference) findPreference(KEY_TOGGLE_NSD);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
-        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam, nfcAdvanced);
+/* END [P160421001] - Patch for Dynamic SE Selection */
 
         mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);
 
@@ -280,15 +293,21 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
             findPreference(KEY_TOGGLE_NFC).setDependency(KEY_TOGGLE_AIRPLANE);
             findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+            findPreference(KEY_NFC_ADVANCED_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+/* END [P160421001] - Patch for Dynamic SE Selection */
         }
 
         // Remove NFC if not available
         mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
         if (mNfcAdapter == null) {
             getPreferenceScreen().removePreference(nfc);
-            getPreferenceScreen().removePreference(androidBeam);
+            // getPreferenceScreen().removePreference(androidBeam);
             mNfcEnabler = null;
         }
+
+        getPreferenceScreen().removePreference(androidBeam);
 
         // Remove Mobile Network Settings and Manage Mobile Plan for secondary users,
         // if it's a wifi-only device, or if the settings are restricted.
@@ -461,6 +480,10 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                     if (adapter == null) {
                         result.add(KEY_TOGGLE_NFC);
                         result.add(KEY_ANDROID_BEAM_SETTINGS);
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+                        result.add(KEY_NFC_ADVANCED_SETTINGS);
+/* END [P160421001] - Patch for Dynamic SE Selection */
                     }
                 }
 

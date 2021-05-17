@@ -62,6 +62,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.ArrayUtils;
@@ -386,6 +387,8 @@ public class SettingsActivity extends Activity
     private ActionBar mActionBar;
     private SwitchBar mSwitchBar;
 
+    private TextView mTitleTextView;
+
     private Button mNextButton;
 
     private boolean mDisplayHomeAsUpEnabled;
@@ -497,7 +500,8 @@ public class SettingsActivity extends Activity
         final String query = mSearchQuery;
 
         mSearchMenuItem = menu.findItem(R.id.search);
-        mSearchView = (SearchView) mSearchMenuItem.getActionView();
+        // mSearchView = (SearchView) mSearchMenuItem.getActionView();
+        
 
         if (mSearchMenuItem == null || mSearchView == null) {
             return false;
@@ -515,6 +519,7 @@ public class SettingsActivity extends Activity
             mSearchMenuItem.expandActionView();
         }
         mSearchView.setQuery(query, true /* submit */);
+        
 
         return true;
     }
@@ -579,6 +584,12 @@ public class SettingsActivity extends Activity
 
         setContentView(mIsShowingDashboard ?
                 R.layout.settings_main_dashboard : R.layout.settings_main_prefs);
+        mActionBar = getActionBar();
+        if(mIsShowingDashboard){
+            mTitleTextView= (TextView)findViewById(R.id.title_tv);
+            mTitleTextView.setText("Settings");
+            mActionBar.hide();
+        }
 
         mContent = (ViewGroup) findViewById(R.id.main_content);
 
@@ -640,7 +651,7 @@ public class SettingsActivity extends Activity
             }
         }
 
-        mActionBar = getActionBar();
+        
         if (mActionBar != null) {
             mActionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
             mActionBar.setHomeButtonEnabled(mDisplayHomeAsUpEnabled);
@@ -718,8 +729,10 @@ public class SettingsActivity extends Activity
 
             final String initialTitleResPackageName = intent.getStringExtra(
                     EXTRA_SHOW_FRAGMENT_TITLE_RES_PACKAGE_NAME);
+
             if (initialTitleResPackageName != null) {
                 try {
+                  
                     Context authContext = createPackageContextAsUser(initialTitleResPackageName,
                             0 /* flags */, new UserHandle(UserHandle.myUserId()));
                     mInitialTitle = authContext.getResources().getText(mInitialTitleResId);
@@ -1299,6 +1312,12 @@ public class SettingsActivity extends Activity
                             UserManager.DISALLOW_DEBUGGING_FEATURES)) {
                         removeTile = true;
                     }
+                }
+
+                if (id == R.id.security_settings || id == R.id.print_settings ||
+                    id == R.id.account_settings ||
+                    id == R.id.accessibility_settings || id == R.id.privacy_settings) {
+                        removeTile = true;
                 }
 
                 if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0

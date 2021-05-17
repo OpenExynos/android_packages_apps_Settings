@@ -867,6 +867,7 @@ public class ManageApplications extends InstrumentedFragment
             mBaseEntries = entries;
             if (mBaseEntries != null) {
                 mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
+                // mEntries = moveUndesiredApps(mEntries);
             } else {
                 mEntries = null;
             }
@@ -909,6 +910,29 @@ public class ManageApplications extends InstrumentedFragment
                 }
                 return newEntries;
             }
+        }
+
+        ArrayList<ApplicationsState.AppEntry> moveUndesiredApps(ArrayList<ApplicationsState.AppEntry> origEntries)
+        {
+            ArrayList<ApplicationsState.AppEntry> newEntries
+                = new ArrayList<ApplicationsState.AppEntry>();
+            for (int i=0; i<origEntries.size(); i++) {
+                ApplicationsState.AppEntry entry = origEntries.get(i);
+                if (!isUndesiredApp(entry.info.packageName)) {
+                    newEntries.add(entry);
+                }
+            }
+            return newEntries;
+        }
+
+        private boolean isUndesiredApp (String pkName) {
+            if(pkName.equals("com.android.phone") || pkName.equals("com.android.providers.telephony") ||
+                pkName.equals("com.android.smspush") || pkName.equals("com.android.providers.downloads") ||
+                pkName.equals("com.android.dialer") || pkName.equals("com.android.musicfx") ||
+                pkName.equals("com.android.contacts") || pkName.equals("com.android.mms.service")) {
+                return true;
+            }
+            return false;
         }
 
         @Override

@@ -26,6 +26,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import android.util.Log;
+
 class WifiDialog extends AlertDialog implements WifiConfigUiBase {
     static final int BUTTON_SUBMIT = DialogInterface.BUTTON_POSITIVE;
     static final int BUTTON_FORGET = DialogInterface.BUTTON_NEUTRAL;
@@ -80,6 +82,9 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
             mController.enableSubmitIfAppropriate();
         }
 
+        getForgetButton();
+        getCancelButton();
+
         if (mHideForgetButton) {
             mController.hideForgetButton();
         }
@@ -97,17 +102,29 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
 
     @Override
     public Button getSubmitButton() {
-        return getButton(BUTTON_SUBMIT);
+        Button submit = getButton(BUTTON_SUBMIT);
+        if(submit != null) {
+            submit.setTextSize(12);
+        }
+        return submit;
     }
 
     @Override
     public Button getForgetButton() {
-        return getButton(BUTTON_FORGET);
+        Button forget = getButton(BUTTON_FORGET);
+        if(forget != null) {
+            forget.setTextSize(12);
+        }
+        return forget;
     }
 
     @Override
     public Button getCancelButton() {
-        return getButton(BUTTON_NEGATIVE);
+        Button cancel = getButton(BUTTON_NEGATIVE);
+        if(cancel != null) {
+            cancel.setTextSize(12);
+        }
+        return cancel;
     }
 
     @Override

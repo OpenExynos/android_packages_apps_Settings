@@ -37,6 +37,14 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     private final Context mContext;
     private final SwitchPreference mSwitch;
     private final PreferenceScreen mAndroidBeam;
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+    private final PreferenceScreen mNfcAdvanced;
+    static final String PREF_NFC_ADVANCED = "NfcAdvancedSettingPrefs";
+    static final String PREF_SELECTED_DEFAULT_SE = "selected_default_se";
+    static final String TAG = "NfcEnabler";
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
     private final NfcAdapter mNfcAdapter;
     private final IntentFilter mIntentFilter;
     private boolean mBeamDisallowed;
@@ -53,10 +61,17 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     };
 
     public NfcEnabler(Context context, SwitchPreference switchPreference,
-            PreferenceScreen androidBeam) {
+/* START [P160421001] - Patch for Dynamic SE Selection */
+            PreferenceScreen androidBeam, PreferenceScreen nfcAdvanced) {
+/* END [P160421001] - Patch for Dynamic SE Selection */
         mContext = context;
         mSwitch = switchPreference;
         mAndroidBeam = androidBeam;
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+        mNfcAdvanced = nfcAdvanced;
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
         mNfcAdapter = NfcAdapter.getDefaultAdapter(context);
         mBeamDisallowed = ((UserManager) mContext.getSystemService(Context.USER_SERVICE))
                 .hasUserRestriction(UserManager.DISALLOW_OUTGOING_BEAM);
@@ -65,12 +80,19 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
             // NFC is not supported
             mSwitch.setEnabled(false);
             mAndroidBeam.setEnabled(false);
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+            mNfcAdvanced.setEnabled(false);
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
             mIntentFilter = null;
             return;
         }
         if (mBeamDisallowed) {
             mAndroidBeam.setEnabled(false);
         }
+
+        mNfcAdapter.disableNdefPush();
         mIntentFilter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
     }
 
@@ -113,6 +135,12 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
             mSwitch.setEnabled(true);
             mAndroidBeam.setEnabled(false);
             mAndroidBeam.setSummary(R.string.android_beam_disabled_summary);
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+            mNfcAdvanced.setEnabled(false);
+            mNfcAdvanced.setSummary(R.string.nfc_advanced_disabled_summary);
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
             break;
         case NfcAdapter.STATE_ON:
             mSwitch.setChecked(true);
@@ -123,16 +151,32 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
             } else {
                 mAndroidBeam.setSummary(R.string.android_beam_off_summary);
             }
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+            mNfcAdvanced.setEnabled(true);
+            mNfcAdvanced.setSummary(R.string.nfc_advanced_on_summary);
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
             break;
         case NfcAdapter.STATE_TURNING_ON:
             mSwitch.setChecked(true);
             mSwitch.setEnabled(false);
             mAndroidBeam.setEnabled(false);
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+            mNfcAdvanced.setEnabled(false);
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
             break;
         case NfcAdapter.STATE_TURNING_OFF:
             mSwitch.setChecked(false);
             mSwitch.setEnabled(false);
             mAndroidBeam.setEnabled(false);
+
+/* START [P160421001] - Patch for Dynamic SE Selection */
+            mNfcAdvanced.setEnabled(false);
+/* END [P160421001] - Patch for Dynamic SE Selection */
+
             break;
         }
     }

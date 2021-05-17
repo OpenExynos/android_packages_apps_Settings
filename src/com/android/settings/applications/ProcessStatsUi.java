@@ -36,6 +36,7 @@ import com.android.settings.applications.ProcStatsData.MemInfo;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessStatsUi extends ProcessStatsBase {
@@ -143,6 +144,29 @@ public class ProcessStatsUi extends ProcessStatsBase {
         return sb.toString();
     }
 
+    ArrayList<ProcStatsPackageEntry> moveUndesiredApps(List<ProcStatsPackageEntry> origEntries)
+    {
+        ArrayList<ProcStatsPackageEntry> newEntries
+            = new ArrayList<ProcStatsPackageEntry>();
+        for (int i=0; i<origEntries.size(); i++) {
+            ProcStatsPackageEntry entry = origEntries.get(i);
+            if (!isUndesiredApp(entry.mPackage)) {
+                newEntries.add(entry);
+            }
+        }
+        return newEntries;
+    }
+
+    private boolean isUndesiredApp (String pkName) {
+        if(pkName.equals("com.android.phone") || pkName.equals("com.android.providers.telephony") ||
+            pkName.equals("com.android.smspush") || pkName.equals("com.android.providers.downloads") ||
+            pkName.equals("com.android.dialer") || pkName.equals("com.android.musicfx") ||
+            pkName.equals("com.android.contacts") || pkName.equals("com.android.mms.service")) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void refreshUi() {
         mAppListGroup.removeAll();
@@ -154,7 +178,7 @@ public class ProcessStatsUi extends ProcessStatsBase {
         MemInfo memInfo = mStatsManager.getMemInfo();
 
         List<ProcStatsPackageEntry> pkgEntries = mStatsManager.getEntries();
-
+        // pkgEntries = moveUndesiredApps(pkgEntries);
         // Update everything and get the absolute maximum of memory usage for scaling.
         for (int i=0, N=pkgEntries.size(); i<N; i++) {
             ProcStatsPackageEntry pkg = pkgEntries.get(i);

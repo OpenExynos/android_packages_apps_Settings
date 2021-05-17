@@ -163,7 +163,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             removePreference(KEY_CAMERA_GESTURE);
         }
 
-        if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
+        if (false) {
             mCameraDoubleTapPowerGesturePreference
                     = (SwitchPreference) findPreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
             mCameraDoubleTapPowerGesturePreference.setOnPreferenceChangeListener(this);
@@ -171,7 +171,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             removePreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
         }
 
-        if (RotationPolicy.isRotationLockToggleVisible(activity)) {
+        if (false) {
             DropDownPreference rotatePreference =
                     (DropDownPreference) findPreference(KEY_AUTO_ROTATE);
             rotatePreference.addItem(activity.getString(R.string.display_auto_rotate_rotate),
@@ -217,6 +217,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mNightModePreference.setValue(String.valueOf(currentNightMode));
             mNightModePreference.setOnPreferenceChangeListener(this);
         }
+        removePreference(KEY_SCREEN_SAVER);
+        removePreference("wifi_display");
     }
 
     private static boolean allowAllRotations(Context context) {

@@ -82,7 +82,9 @@
     <dimen name="caption_preview_text_size">48dp</dimen>
 
     <!-- ActionBar height -->
-    <dimen name="actionbar_size">56dip</dimen>
+    <dimen name="actionbar_size">36dip</dimen>
+
+    <dimen name="actionbar_title_size">14sp</dimen>
 
     <!-- ActionBar contentInsetStart -->
     <dimen name="actionbar_contentInsetStart">16dp</dimen>
@@ -106,13 +108,13 @@
     <dimen name="dashboard_category_elevation">4dp</dimen>
 
     <!-- Dashboard category title layout height -->
-    <dimen name="dashboard_category_title_height">48dp</dimen>
+    <dimen name="dashboard_category_title_height">30dp</dimen>
 
     <!-- Dashboard category title margin start -->
     <dimen name="dashboard_category_title_margin_start">16dp</dimen>
 
     <!-- Dashboard tile minimum height -->
-    <dimen name="dashboard_tile_minimum_height">72dp</dimen>
+    <dimen name="dashboard_tile_minimum_height">30dp</dimen>
 
     <!-- Dashboard image tile size -->
     <dimen name="dashboard_tile_image_size">24dp</dimen>

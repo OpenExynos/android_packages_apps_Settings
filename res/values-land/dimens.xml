@@ -28,6 +28,8 @@
     <!-- ActionBar height -->
     <dimen name="actionbar_size">46dip</dimen>
 
+    <dimen name="actionbar_title_size">14sp</dimen>
+
     <!-- Dashboard margins between each tiles within the layout -->
     <dimen name="dashboard_cell_gap_x">8dp</dimen>
     <dimen name="dashboard_cell_gap_y">0dp</dimen>
